@@ -1,0 +1,83 @@
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Loan Calculator</h1>
+    <form (ngSubmit)="onSubmit()" #loanApplicationForm="ngForm">
+
+      <div class="form-group">
+        <label for="personalCode">Personal code</label>
+        <input type="text" class="form-control" id="personalCode"
+               required
+               [(ngModel)]="model.personalCode" name="personalCode"
+               #personalCode="ngModel">
+        <div [hidden]="personalCode.valid || personalCode.pristine"
+             class="alert alert-danger">
+          Personal code is required
+        </div>
+        <br/><br/>
+        <p>Clients present in system:
+          49002010965 - debt<br/>
+          49002010976 - segment 1 (credit_modifier = 100)<br/>
+          49002010987 - segment 2 (credit_modifier = 300)<br/>
+          49002010998 - segment 3 (credit_modifier = 1000)<br/>
+        </p>
+        <hr/>
+        <label for="name">Loan amount</label>
+        <input type="text" class="form-control" id="loanAmount"
+               required
+               [(ngModel)]="model.loanAmount" name="loanAmount"
+               #loanAmount="ngModel">
+        <div [hidden]="loanAmount.valid || loanAmount.pristine"
+             class="alert alert-danger">
+          Loan amount is required
+        </div>
+        <br/><br/>
+        <p>Values from 2000 eur to 10000 eur are acceptable
+        </p>
+        <hr/>
+        <label for="name">Loan period</label>
+        <input type="text" class="form-control" id="loanPeriod"
+               required
+               [(ngModel)]="model.loanPeriod" name="loanPeriod"
+               #loanPeriod="ngModel">
+        <div [hidden]="loanPeriod.valid || loanPeriod.pristine"
+             class="alert alert-danger">
+          Loan period is required
+        </div>
+      </div>
+      <br/>
+      <p>Values from 12 to 60 months are acceptable.
+      </p>
+      <hr/>
+      <button type="submit" class="btn btn-success" [disabled]="!loanApplicationForm.form.valid">Submit</button>
+      <button type="button" class="btn btn-default" (click)="newLoanApplication(); loanApplicationForm.reset()">New Application</button>
+    </form>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h2>You applied for a loan:</h2>
+    <div class="row">
+      <div class="col-xs-3">Personal code</div>
+      <div class="col-xs-9">{{ model.personalCode }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Loan amount</div>
+      <div class="col-xs-9">{{ model.loanAmount }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Loan period</div>
+      <div class="col-xs-9">{{ model.loanPeriod }}</div>
+    </div>
+    <hr/>
+    <h2>Decision is:</h2>
+    <div class="row">
+      <div class="col-xs-3">Decision</div>
+      <div class="col-xs-9">{{ model.granted }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Granted amount</div>
+      <div class="col-xs-9">{{ model.grantedLoanAmount }}</div>
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="submitted=false">Try again</button>
+  </div>
+</div>

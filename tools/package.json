@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "karma-jasmine": "^5.1.0"
+  },
+  "devDependencies": {
+    "jasmine": "^5.1.0",
+    "jasmine-core": "^5.1.1",
+    "karma": "^6.4.2"
+  }
+}
